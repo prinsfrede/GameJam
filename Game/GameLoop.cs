@@ -14,6 +14,7 @@ namespace EscapeRoomGame.Game
         {
             int moolahToWin = 1000;
             Variables var = new Variables();
+            InitItems(var);
             PrintHelper.PrintCentered("════════════════════════════════════════════════════════════════════════════");
             PrintHelper.PrintCentered("Velkommen til det tekstbaserede escape-room!");
             PrintHelper.PrintCentered("Balancer din indtægt (Moolah) og stress for at undgå mavesår og fiasko!");
@@ -83,8 +84,13 @@ namespace EscapeRoomGame.Game
             }
 
             // Game over, hvis stress når 100
+            Console.Clear();
+
+            Console.WriteLine("\n\n");
+            Console.ForegroundColor = ConsoleColor.Red;
             PrintHelper.PrintCentered("GAME OVER! Du fik mavesår af stress og måtte stoppe.");
             PrintHelper.PrintCentered("════════════════════════════════════════════════════════════════════════════");
+            Console.ReadKey();
         }
 
         // Arbejdsfunktion (tjen penge, men øger stress)
@@ -171,7 +177,7 @@ namespace EscapeRoomGame.Game
         public static void TilfaeldigBegivenhed(Variables var)
         {
             Random rnd = new Random();
-            int begivenhed = rnd.Next(1, 7);
+            int begivenhed = rnd.Next(1, 9);
 
             switch (begivenhed)
             {
@@ -199,6 +205,14 @@ namespace EscapeRoomGame.Game
                     PrintHelper.PrintCentered("\nDu vandt en Business Taktik Bog! Den er tilføjet til din inventory.");
                     var.Inventory.Add("Business Taktik Bog");
                     break;
+                case 7:
+                    PrintHelper.PrintCentered("\nDu fandt en Lucky Charm! Lucky you!");
+                    var.Inventory.Add("Lucky Charm");
+                    break;
+                    case 8:
+                    PrintHelper.PrintCentered("\nDu huskede, at du ejer en stressbold...");
+                    var.Inventory.Add("Stressbold");
+                        break;
             }
         }
 
